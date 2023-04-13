@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Matrix</title>
+    <style>
+      html,
+      body,
+      .viewport {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        overflow-x: hidden;
+        color: #49cfff;
+      }
+      body {
+        background: #060522;
+      }
+      body::-webkit-scrollbar {
+        width: 0px;
+      }
+      canvas {
+        filter: blur(0.5px);
+        animation: fadein 4s;
+      }
+      @keyframes fadein {
+        from {
+          filter: blur(50px);
+          scale: 1.5;
+        }
+        to {
+          filter: blur(0.5px);
+          scale: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        width: 100%;
+        height: 80vh;
+        position: absolute;
+        z-index: -1;
+        background-image: linear-gradient(
+          #04143a 0%,
+          #060522 50%,
+          #060522 100%
+        );
+      "
+    ></div>
+    <div
+      style="
+        width: 95vw;
+        height: 80vh;
+        position: relative;
+        left: 50%;
+        top: 2.5vw;
+        transform: translateX(-50%);
+      "
+    >
+      <canvas id="q" style="border-radius: 2vw">
+        Sorry Browser Won't Support
+      </canvas>
+      <div
+        style="
+          position: absolute;
+          top: calc(50%);
+          left: calc(50%);
+          transform: translate(-50%, -50%);
+          font-size: 20px;
+          font-family: 'JetBrains Mono', monospace;
+          font-weight: 600;
+          color: #fff;
+          text-shadow: 0 0 10px #49cfff;
+          filter: blur(0.5px);
+          backdrop-filter: blur(10px);
+          background-color: #289ed455;
+          padding: 10px 20px;
+          border-radius: 15px;
+          letter-spacing: 1.4;
+          animation: fadein 4s;
+        "
+      >
+        @ForLoop
+      </div>
+    </div>
+    <div class="body" style="position: absolute; top: calc(5vw + 85vh)">
+      <div class="text">hi</div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        var s = window;
+        var width = (q.width = s.innerWidth * 0.95);
+        var height = (q.height = s.innerHeight * 0.85);
+        window.addEventListener(
+          "resize",
+          function () {
+            var width = (q.width = s.innerWidth * 0.95);
+            var height = (q.height = s.innerHeight * 0.85);
+          },
+          false
+        );
+        var yPositions = Array(150).join(0).split("");
+        var ctx = q.getContext("2d");
+        var character = null;
+        var interval = 100;
+        var drawInterval;
+
+        var draw = function () {
+          ctx.fillStyle = "#05112e1a";
+          ctx.fillRect(0, 0, width, height);
+          ctx.fillStyle = "#49cfff";
+          ctx.font = "20px jetbrains mono semibold";
+          ctx.globalAlpha = 1;
+
+          yPositions.slice(1).map(function (y, index) {
+            // draw the rest of the matrix
+            text = character || String.fromCharCode(1e2 + Math.random() * 20);
+            x = index * 12;
+            ctx.globalAlpha = Math.random() + 0.1;
+            q.getContext("2d").fillText(text, x, y);
+            if (y > 2000 + Math.random() * 1e4) {
+              yPositions[index + 1] = 0;
+            } else {
+              yPositions[index + 1] = y + 20;
+            }
+          });
+          ctx.font = "100px jetbrains mono semibold";
+        };
+
+        drawInterval = setInterval(draw, interval);
+
+        q.addEventListener("mousemove", function (event) {
+          var mouseX = event.clientX;
+          var mouseY = event.clientY;
+          yPositions[Math.floor(mouseX / 12.5)] = 0;
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key == "Escape") {
+            character = null;
+            interval = 100;
+            clearInterval(drawInterval);
+            drawInterval = setInterval(draw, interval);
+          } else if (event.key == "r" || event.key == "R") {
+            window.location.href =
+              "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+          } else {
+            ![
+              "Shift",
+              "Enter",
+              "Control",
+              "Alt",
+              "Meta",
+              "Tab",
+              "Backspace",
+              "Dead",
+            ].includes(event.key)
+              ? (character = event.key)
+              : (character = "$");
+          }
+
+          if (event.key >= "0" && event.key <= "9") {
+            interval = (9 - event.key) * 25;
+            clearInterval(drawInterval);
+            drawInterval = setInterval(draw, interval);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
