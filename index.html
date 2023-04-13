@@ -120,7 +120,7 @@
           ctx.fillStyle = "#05112e1a";
           ctx.fillRect(0, 0, width, height);
           ctx.fillStyle = "#49cfff";
-          ctx.font = "20px jetbrains mono semibold";
+          ctx.font = "20px jetbrains mono";
           ctx.globalAlpha = 1;
 
           yPositions.slice(1).map(function (y, index) {
@@ -135,7 +135,7 @@
               yPositions[index + 1] = y + 20;
             }
           });
-          ctx.font = "100px jetbrains mono semibold";
+          ctx.font = "100px jetbrains mono";
         };
 
         drawInterval = setInterval(draw, interval);
