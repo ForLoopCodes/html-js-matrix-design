@@ -1,3 +1,11 @@
+<!--
+  
+TODO
+  1. CHECK 0 (html)
+  2. CHECK 1 (js)
+
+-->
+
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -34,6 +42,17 @@
           scale: 1;
         }
       }
+      .body {
+        width: 600px;
+        height: auto;
+        position: absolute;
+        top: 80%;
+      }
+      @media screen and (max-width: 600px) {
+        .body {
+          width: 300px;
+        }
+      }
     </style>
     <link
       rel="stylesheet"
@@ -51,11 +70,7 @@
         height: 80vh;
         position: absolute;
         z-index: -1;
-        background-image: linear-gradient(
-          #04143a 0%,
-          #060522 50%,
-          #060522 100%
-        );
+        background: #1206221a;
       "
     ></div>
     <div
@@ -84,7 +99,7 @@
           text-shadow: 0 0 10px #49cfff;
           filter: blur(0.5px);
           backdrop-filter: blur(10px);
-          background-color: #289ed455;
+          background-color: #ff0000;
           padding: 10px 20px;
           border-radius: 15px;
           letter-spacing: 1.4;
@@ -95,7 +110,41 @@
       </div>
     </div>
     <div class="body" style="position: absolute; top: calc(5vw + 85vh)">
-      <div class="text">hi</div>
+      <div class="text">
+        <!--CHECK 0
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />
+        hi
+        <br />-->
+      </div>
     </div>
     <script>
       $(document).ready(function () {
@@ -117,10 +166,12 @@
         var drawInterval;
 
         var draw = function () {
-          ctx.fillStyle = "#05112e1a";
+          ctx.fillStyle = "#1206221a";
           ctx.fillRect(0, 0, width, height);
-          ctx.fillStyle = "#49cfff";
-          ctx.font = "20px jetbrains mono";
+          ctx.fillStyle = "#ff0000";
+          ctx.font =
+            // CHECK 1
+            s.innerWidth < 700 ? "150px jetbrains mono" : "20px jetbrains mono";
           ctx.globalAlpha = 1;
 
           yPositions.slice(1).map(function (y, index) {
