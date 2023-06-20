@@ -1,11 +1,4 @@
-<!--
-  
-TODO
-  1. CHECK 0 (html)
-  2. CHECK 1 (js)
-
--->
-
+<!DOCTYPE html>
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -23,14 +16,14 @@ TODO
         color: #49cfff;
       }
       body {
-        background: #060522;
+        background: #070627;
+        animation: fadein 4s;
       }
       body::-webkit-scrollbar {
         width: 0px;
       }
       canvas {
         filter: blur(0.5px);
-        animation: fadein 4s;
       }
       @keyframes fadein {
         from {
@@ -47,11 +40,42 @@ TODO
         height: auto;
         position: absolute;
         top: 80%;
+        left: 50%;
+        transform: translateX(-50%);
       }
       @media screen and (max-width: 600px) {
         .body {
           width: 300px;
         }
+      }
+      .buttonsContainer {
+        width: 95vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0vh;
+        margin-left: -1vw;
+      }
+      .buttonsContainer button {
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        font-size: 16px;
+        padding: 15px;
+        border-radius: 20px;
+        background: #120623;
+        color: #ffffffbb;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .mainContent {
+        width: 800px;
+        max-width: 95vw;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
       }
     </style>
     <link
@@ -70,12 +94,12 @@ TODO
         height: 80vh;
         position: absolute;
         z-index: -1;
-        background: #1206221a;
+        background: #070627;
       "
     ></div>
     <div
       style="
-        width: 95vw;
+        width: 96vw;
         height: 80vh;
         position: relative;
         left: 50%;
@@ -83,7 +107,10 @@ TODO
         transform: translateX(-50%);
       "
     >
-      <canvas id="q" style="border-radius: 2vw">
+      <canvas
+        id="q"
+        style="border-radius: 1.5vw; box-shadow: 0px 20px 20px 2px #6a23231c"
+      >
         Sorry Browser Won't Support
       </canvas>
       <div
@@ -99,51 +126,39 @@ TODO
           text-shadow: 0 0 10px #49cfff;
           filter: blur(0.5px);
           backdrop-filter: blur(10px);
-          background-color: #ff0000;
+          background-color: #ff0000bb;
           padding: 10px 20px;
           border-radius: 15px;
-          letter-spacing: 1.4;
+          letter-spacing: 1.5;
           animation: fadein 4s;
         "
       >
         @ForLoop
       </div>
     </div>
-    <div class="body" style="position: absolute; top: calc(5vw + 85vh)">
+    <div
+      class="body"
+      style="
+        position: absolute;
+        top: calc(5vw + 85vh);
+        width: 80vw;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      "
+    >
       <div class="text">
-        <!--CHECK 0
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />
-        hi
-        <br />-->
+        <div class="buttonsContainer">
+          <button id="about">About</button>
+          <button id="projects">Projects</button>
+          <button id="contact">Contact</button>
+        </div>
+        <div class="mainContent">
+          <h1>hi i am meet</h1>
+        </div>
       </div>
     </div>
     <script>
@@ -157,9 +172,9 @@ TODO
             var width = (q.width = s.innerWidth * 0.95);
             var height = (q.height = s.innerHeight * 0.85);
           },
-          false
+          true
         );
-        var yPositions = Array(150).join(0).split("");
+        var yPositions = Array(190).join(0).split("");
         var ctx = q.getContext("2d");
         var character = null;
         var interval = 100;
@@ -169,13 +184,10 @@ TODO
           ctx.fillStyle = "#1206221a";
           ctx.fillRect(0, 0, width, height);
           ctx.fillStyle = "#ff0000";
-          ctx.font =
-            // CHECK 1
-            s.innerWidth < 700 ? "150px jetbrains mono" : "20px jetbrains mono";
+          ctx.font = "20px jetbrains mono";
           ctx.globalAlpha = 1;
 
           yPositions.slice(1).map(function (y, index) {
-            // draw the rest of the matrix
             text = character || String.fromCharCode(1e2 + Math.random() * 20);
             x = index * 12;
             ctx.globalAlpha = Math.random() + 0.1;
